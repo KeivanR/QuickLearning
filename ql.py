@@ -1,12 +1,10 @@
 #!/usr/bin/python3.6
 
-from ODSReader import ODSReader
-
-doc = ODSReader(u'database.ods', clonespannedcolumns=True)
-table = doc.getSheet(u'Sheet1')
-for i in range(len(table)):
-    for j in range(len(table[i])):
-        print (table[i][j])
+import csv
+with open('database.csv', newline='') as csvfile:
+	table = csv.reader(csvfile, delimiter=' ', quotechar='|')
+	for row in table:
+		print(', '.join(row))
 
 
 print(table)
