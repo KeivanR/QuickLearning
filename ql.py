@@ -3,7 +3,7 @@
 import csv
 import random
 
-with open('database.csv', newline='') as csvfile:
+with open('databaseEUROPE.csv', newline='') as csvfile:
 	dt = list(csv.reader(csvfile, delimiter=',', quotechar='|'))
 
 
@@ -23,15 +23,19 @@ while 1:
 	if res == 'q':
 		break
 	if res != dt[k][1]:
-		print("It was ",str(dt[k][1]),"!")
+		print("\nIt was ",str(dt[k][1]),"!")
 		p = [(1-w)*x for x in p]
 		p[k] = p[k]/(1-w)
 		p[k] += w*(1-p[k]) 
 	else:
-		print("Correct!")
-		p[k] -= w*p[k]
-		p = [(1+w*p[k]/(1-p[k]))*x for x in p]
+		print("\nCorrect!")
+		w2 = 3*w #careful, can go over 1
+		p[k] -= w2*p[k]
+		p = [(1+w2*p[k]/(1-p[k]))*x for x in p]
 	
 	print("\nProbability goes to ",str(round(p[k]*10000)/100),"%")
-	wait = input("\nContinue?\n")
+	print("somme de p = ",str(sum(p)))
+	wait = input("\nContinue?(q to stop)\n")
+	if (wait == 'q'):
+		break
 
